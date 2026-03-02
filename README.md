@@ -31,7 +31,7 @@ If your dumps differ (signed 8-bit, 16-bit, byte-swapped, or have a fixed header
 ## Repository Layout
 ```
 .
-├── raw_to_wav_batch.py   # main converter script
+├── scrraw_to_wav_batch.py  # main converter script
 └── README.md
 ```
 Outputs are written to `./wav_out` by default (configurable via `--outdir`).
@@ -46,49 +46,49 @@ Install / Run
 
 Clone/download the repository and run directly:
 
-`python raw_to_wav_batch.py --help`
+`python scrraw_to_wav_batch.py --help`
 
 Quick Start (11025 Hz, 8-bit unsigned, mono)
 
 Convert all `.RAW` files in a directory (recursively) to `./wavs`:
 
-`python raw_to_wav_batch.py ./raws --outdir ./wavs --rate 11025 --enc u8`
+`python scrraw_to_wav_batch.py ./raws --outdir ./wavs --rate 11025 --enc u8`
 
 Convert specific files:
 
-`python raw_to_wav_batch.py AIRPLANE.RAW ALL0.RAW ALL1.RAW --outdir ./wavs --rate 11025 --enc u8`
+`python scrraw_to_wav_batch.py AIRPLANE.RAW ALL0.RAW ALL1.RAW --outdir ./wavs --rate 11025 --enc u8`
 
 Common Scenarios
 1) The .RAW has a fixed header before PCM
 
 Skip the header (hex or decimal accepted):
 
-`python raw_to_wav_batch.py ./raws --outdir ./wavs --rate 11025 --enc u8 --skip 0x800`
+`python scrraw_to_wav_batch.py ./raws --outdir ./wavs --rate 11025 --enc u8 --skip 0x800`
 
 2) The audio is signed 8-bit (sounds distorted with u8)
 
 Try s8:
 
-`python raw_to_wav_batch.py ./raws --outdir ./wavs --rate 11025 --enc s8`
+`python scrraw_to_wav_batch.py ./raws --outdir ./wavs --rate 11025 --enc s8`
 
 3) The audio is 16-bit PCM
 
 Little-endian:
 
-`python raw_to_wav_batch.py ./raws --outdir ./wavs --rate 11025 --enc s16le`
+`python scrraw_to_wav_batch.py ./raws --outdir ./wavs --rate 11025 --enc s16le`
 
 Big-endian / byte-swapped:
 
-`python raw_to_wav_batch.py ./raws --outdir ./wavs --rate 11025 --enc s16be`
+`python scrraw_to_wav_batch.py ./raws --outdir ./wavs --rate 11025 --enc s16be`
 
 4) Trim silence padding (typical 0x80 for unsigned 8-bit)
 
 Useful if files include long silent tails/heads:
 
-`python raw_to_wav_batch.py ./raws --outdir ./wavs --rate 11025 --enc u8 --trim-u8-silence`
+`python scrraw_to_wav_batch.py ./raws --outdir ./wavs --rate 11025 --enc u8 --trim-u8-silence`
 
 5) Overwrite existing WAVs
 
 By default, existing outputs are kept:
 
-`python raw_to_wav_batch.py ./raws --outdir ./wavs --overwrite`
+`python scrraw_to_wav_batch.py ./raws --outdir ./wavs --overwrite`
